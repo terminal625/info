@@ -62,7 +62,7 @@
   (sdl:update-display))
 
 (defun myinit ()
-	(sdl:window 720 480 :title-caption "a term made by terminal256" :flags '(sdl:sdl-opengl))
+	(sdl:window 720 480 :title-caption "a fuck made by terminal256" :flags '(sdl:sdl-opengl))
   (setf (sdl:frame-rate) 60)
 
   ;; cl-opengl needs platform specific support to be able to load GL
