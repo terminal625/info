@@ -1,16 +1,14 @@
-(ql:quickload "cl-opengl") 
-(ql:quickload "cl-glu")
-(ql:quickload "lispbuilder-sdl")
+(in-package :render)
 
 (defparameter *the-texture* (car (gl:gen-textures 1)))
-(defparameter	texture-data 	#(#xff #x00 #x00 #x00 #x00 #x00 #x00 #xff
-						                  #x00 #x00 #xff #xff #xff #xff #x00 #x00
-						                  #x00 #xff #x00 #xff #xff #x00 #xff #x00
-						                  #x00 #xff #xff #xff #xff #xff #xff #x00
-						                  #x00 #xff #x00 #xff #xff #x00 #xff #x00
-						                  #x00 #xff #x30 #x00 #x00 #x30 #xff #x00
-						                  #x00 #x00 #xff #xf2 #xff #xff #x00 #x00
-						                  #xff #x00 #x00 #x00 #x00 #x00 #x00 #xff))
+(defparameter	texture-data 	#(  #xff #x00 #x00 #x00 #x00 #x00 #x00 #xff
+                                #x00 #x00 #xff #xff #xff #xff #x00 #x00
+                                #x00 #xff #x00 #xff #xff #x00 #xff #x00
+                                #x00 #xff #xff #xff #xff #xff #xff #x00
+                                #x00 #xff #x00 #xff #xff #x00 #xff #x00
+                                #x00 #xff #x30 #x00 #x00 #x30 #xff #x00
+                                #x00 #x00 #xff #xf2 #xff #xff #x00 #x00
+                                #xff #x00 #x00 #x00 #x00 #x00 #x00 #xff))
 
 (defun make-my-texture (the-texture the-tex-data)
 	(gl:bind-texture :texture-2d the-texture)
@@ -26,6 +24,12 @@
 
 (defun random-gl-color ()
   (gl:color (random-hue) (random-hue) (random-hue)))
+
+(defun myenter ()
+  (make-my-texture *the-texture* texture-data))
+
+(defun myleave ()
+  (gl:delete-textures (list *the-texture*)))
 
 
 (defun draw ()
@@ -59,5 +63,4 @@
     (gl:color 0 0 1)
     (gl:vertex 1 -1 0)) ;; (this one changed too)
   ;; finish the frame
-  (gl:flush)
-  (sdl:update-display))
+  (gl:flush))
